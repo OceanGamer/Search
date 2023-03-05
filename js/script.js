@@ -2,14 +2,15 @@ const optionMenu = document.getElementById('optionsmenu');
 const settingsbtn = document.getElementById('settingsbtn');
 const searchinput = document.getElementById('srchinput')
 const webmotors = {
-    google: 'https://www.google.com/search?q=',
-    bing: 'https://www.bing.com/search?q=',
-    yahoo: 'https://espanol.search.yahoo.com/search;_ylt=AwrEmFFlaQNkbQYkwDYDEQx.;_ylu=Y29sbwNiZjEEcG9zAzEEdnRpZAMEc2VjA3Fydw--?fr=sfp&ei=UTF-8&p=',
-    duckduckgo: 'https://duckduckgo.com/?q='
+    0: 'https://www.google.com/search?q=',
+    1: 'https://www.bing.com/search?q=',
+    2: 'https://espanol.search.yahoo.com/search;_ylt=AwrEmFFlaQNkbQYkwDYDEQx.;_ylu=Y29sbwNiZjEEcG9zAzEEdnRpZAMEc2VjA3Fydw--?fr=sfp&ei=UTF-8&p=',
+    3: 'https://duckduckgo.com/?q='
 };
 let openmenu = false;
-let actualmotor = document.cookie || 0;
-console.log(document.cookie)
+let cookiebrowser = document.cookie;
+let separatedCookie = cookiebrowser.split(/,|[=;]/)
+let actualmotor = separatedCookie[1] || 0;
 optionMenu.style.display = 'none';
 
 function OpenCloseMenu() {
@@ -50,7 +51,40 @@ function LoadAll() {
     }
 }
 
+function Search() {
+    let searchindex = document.getElementById('srchinput').value;
+    separatedindex = searchindex.split(/,|[/.]/)
+    let islink = false
+    if (separatedindex[0] == 'https:' || separatedindex[0] == 'http:') {
+        islink = true
+    }
+    for (let i = 0; i < separatedindex.length; i++) {
+        if (separatedindex[i] == 'com' || separatedindex[i] == 'net' || separatedindex[i] == 'org' || separatedindex[i] == 'io' || separatedindex[i] == 'tk' || separatedindex[i] == 'tv' || separatedindex[i] == 'ru' || separatedindex[i] == 'store') {
+            islink = true
+        }    
+    }
+    if (islink == true) {
+        if (separatedindex[0] == 'https:' || separatedindex[0] == 'http:') {
+            loadPage(searchindex);
+        }else{
+            loadPage('http://'+searchindex);
+        }
+    }else{
+        loadPage(webmotors[actualmotor]+searchindex);
+    }
+    
+}
 
+function loadPage(url) {
+    window.location.href = url;
+}
+
+
+document.addEventListener("keydown", function (event) {
+    if (event.key == 'Enter') {
+        Search()
+    }
+});
 settingsbtn.addEventListener('click', OpenCloseMenu);
 LoadAll();
 
