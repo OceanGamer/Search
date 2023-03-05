@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title>OceanSearch</title>
 </head>
-<body>
+<body id="bodyfull">
     <div class="Top">
         <div class="right">
             <a href="https://gmail.com" class="toptext">Gmail</a>
@@ -20,21 +20,33 @@
         
     </div>
     <img src="img/oceanbrowser.png" alt="logo" class="centertop">
-    <p class="centertop2">Busca algo en Google, Bing, Yahoo y Duckduckgo</p>
+    <p class="centertop2">Busca algo en Google, Bing, Yahoo o Duckduckgo</p>
     
     <div class="center flex">
         <div class="optionsMenu" id="optionsmenu">
             <p>Elije un motor de busqueda</p>
             <div class="flex">
-            <button class="button" onclick="ChangeBrowser(0)" style="background-image: url('img/google.png'); background-size: cover; background-position: center;"></button>
-            <button class="button" onclick="ChangeBrowser(1)" style="background-image: url('img/bing.png'); background-size: cover; background-position: center;"></button>
-            <button class="button" onclick="ChangeBrowser(2)" style="background-image: url('img/yahoo.png'); background-size: cover; background-position: center;"></button>
-            <button class="button" onclick="ChangeBrowser(3)" style="background-image: url('img/DuckDuckGo.png'); background-size: cover; background-position: center;"></button>
+            <button class="button" onclick="ChangeBrowser('0')" style="background-image: url('img/google.png'); background-size: cover; background-position: center;"></button>
+            <button class="button" onclick="ChangeBrowser('1')" style="background-image: url('img/bing.png'); background-size: cover; background-position: center;"></button>
+            <button class="button" onclick="ChangeBrowser('2')" style="background-image: url('img/yahoo.png'); background-size: cover; background-position: center;"></button>
+            <button class="button" onclick="ChangeBrowser('3')" style="background-image: url('img/DuckDuckGo.png'); background-size: cover; background-position: center;"></button>
             </div>
         </div>
         <button class="button" id="settingsbtn" style="background-size: cover; background-position: center;"><div class="down"></div></button>
         <input type="text" name="search" id="srchinput" class="InputObject" placeholder="Busca algo en Google o escribe una URL">
         <button class="button" onclick="Search()" style="background-image: url('img/lupa.png'); background-size: cover; background-position: center;"></button>
+    </div>
+    <button class="button downleft" id="" onclick="OpenCloseBackgroundMenu()" style="background-image: url('img/editar.png'); background-size: cover; background-position: center;"></button>
+    <div class="centertop3" id="backgroundMenu">
+        <p>Elige un fondo de pantalla</p>
+        <div>
+        <button class="backgroundpreview" onclick="ChangeBackground(0)"><img src="img/backgrounds/background.jpg" alt="backgroundpreview" style="width: 100%; height: 100%;"><p>OceanBrowser</p></button>
+        <button class="backgroundpreview" onclick="ChangeBackground(1)"><img src="img/backgrounds/background2.jpg" alt="backgroundpreview" style="width: 100%; height: 100%;"><p>Puente de Maracaibo, Venezuela</p></button>
+        <button class="backgroundpreview" onclick="ChangeBackground(2)"><img src="img/backgrounds/background3.jpg" alt="backgroundpreview" style="width: 100%; height: 100%;"><p>Montañas y acantilados</p></button>
+        <button class="backgroundpreview" onclick="ChangeBackground(3)"><img src="img/backgrounds/background4.jpg" alt="backgroundpreview" style="width: 100%; height: 100%;"><p>Torres de Parque Central, Caracas</p></button>
+        <button class="backgroundpreview" onclick="ChangeBackground(4)"><img src="img/backgrounds/background5.jpg" alt="backgroundpreview" style="width: 100%; height: 100%;"><p>Playa Portillo</p></button>
+        <button class="backgroundpreview" onclick="ChangeBackground(5)"><img src="img/backgrounds/background6.jpg" alt="backgroundpreview" style="width: 100%; height: 100%;"><p>Playa con barco</p></button>
+        </div>
     </div>
 
     <script src="js/script.js"></script>

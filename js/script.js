@@ -1,17 +1,31 @@
 const optionMenu = document.getElementById('optionsmenu');
+const backgroundMenu = document.getElementById('backgroundMenu');
 const settingsbtn = document.getElementById('settingsbtn');
-const searchinput = document.getElementById('srchinput')
+const searchinput = document.getElementById('srchinput');
 const webmotors = {
-    0: 'https://www.google.com/search?q=',
-    1: 'https://www.bing.com/search?q=',
-    2: 'https://espanol.search.yahoo.com/search;_ylt=AwrEmFFlaQNkbQYkwDYDEQx.;_ylu=Y29sbwNiZjEEcG9zAzEEdnRpZAMEc2VjA3Fydw--?fr=sfp&ei=UTF-8&p=',
-    3: 'https://duckduckgo.com/?q='
+    '0': 'https://www.google.com/search?q=',
+    '1': 'https://www.bing.com/search?q=',
+    '2': 'https://espanol.search.yahoo.com/search;_ylt=AwrEmFFlaQNkbQYkwDYDEQx.;_ylu=Y29sbwNiZjEEcG9zAzEEdnRpZAMEc2VjA3Fydw--?fr=sfp&ei=UTF-8&p=',
+    '3': 'https://duckduckgo.com/?q='
+};
+
+const backgrounds = {
+    '0': 'img/backgrounds/background.jpg',
+    '1': 'img/backgrounds/background2.jpg',
+    '2': 'img/backgrounds/background3.jpg',
+    '3': 'img/backgrounds/background4.jpg',
+    '4': 'img/backgrounds/background5.jpg',
+    '5': 'img/backgrounds/background6.jpg',
+    
 };
 let openmenu = false;
+let openback = false;
 let cookiebrowser = document.cookie;
 let separatedCookie = cookiebrowser.split(/,|[=;]/)
-let actualmotor = separatedCookie[1] || 0;
+let actualmotor = separatedCookie[1] || '0';
+let actualbackground = separatedCookie[3] || '0';
 optionMenu.style.display = 'none';
+backgroundMenu.style.display = 'none';
 
 function OpenCloseMenu() {
     if (openmenu == false) {
@@ -23,6 +37,16 @@ function OpenCloseMenu() {
     }
 }
 
+function OpenCloseBackgroundMenu() {
+    if (openmenu == false) {
+        backgroundMenu.style.display = 'block';
+        openmenu = true;
+    }else if (openmenu == true) {
+        backgroundMenu.style.display = 'none';
+        openmenu = false;
+    }
+}
+
 function ChangeBrowser(id) {
     actualmotor = id;
     document.cookie = "browsermotor="+id;
@@ -30,22 +54,35 @@ function ChangeBrowser(id) {
     LoadAll()
 }
 
+function ChangeBackground(id) {
+    const body = document.getElementById("bodyfull")
+    actualbackground = id;
+    document.cookie = "browserbackground="+id;
+    body.style.backgroundImage = 'url("'+backgrounds[id]+'")';
+    OpenCloseBackgroundMenu()
+}
+
+function LoadBackground() {
+    const body = document.getElementById("bodyfull")
+    body.style.backgroundImage = 'url("'+backgrounds[actualbackground]+'")';
+}
+
 function LoadAll() {
     switch (actualmotor) {
-        case 0:
+        case '0':
             settingsbtn.style.backgroundImage = 'url("img/google.png")';
             searchinput.placeholder='Busca algo en Google o escribe una URL';
         break;
-        case 1:
+        case '1':
             settingsbtn.style.backgroundImage = 'url("img/bing.png")';
             searchinput.placeholder='Busca algo en Bing o escribe una URL';
         break;
-        case 2:
+        case '2':
             settingsbtn.style.backgroundImage = 'url("img/yahoo.png")';
             searchinput.placeholder='Busca algo en Yahoo o escribe una URL';
         break;
-        case 3:
-            settingsbtn.style.backgroundImage = 'url("img/duckduckgo.png")';
+        case '3':
+            settingsbtn.style.backgroundImage = 'url("img/DuckDuckGo.png")';
             searchinput.placeholder='Busca algo en Duckduckgo o escribe una URL';
         break;
     }
@@ -87,6 +124,7 @@ document.addEventListener("keydown", function (event) {
 });
 settingsbtn.addEventListener('click', OpenCloseMenu);
 LoadAll();
+LoadBackground();
 
 
 
