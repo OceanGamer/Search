@@ -22,8 +22,8 @@ let openmenu = false;
 let openback = false;
 let cookiebrowser = document.cookie;
 let separatedCookie = cookiebrowser.split(/,|[=;]/)
-let actualmotor = separatedCookie[1] || '0';
-let actualbackground = separatedCookie[3] || '0';
+let actualmotor = localStorage.getItem("motor") || "1";
+let actualbackground = localStorage.getItem("background") || "0";
 optionMenu.style.display = 'none';
 backgroundMenu.style.display = 'none';
 
@@ -49,7 +49,7 @@ function OpenCloseBackgroundMenu() {
 
 function ChangeBrowser(id) {
     actualmotor = id;
-    document.cookie = "browsermotor="+id;
+    localStorage.setItem("motor", id);
     OpenCloseMenu()
     LoadAll()
 }
@@ -57,7 +57,7 @@ function ChangeBrowser(id) {
 function ChangeBackground(id) {
     const body = document.getElementById("bodyfull")
     actualbackground = id;
-    document.cookie = "browserbackground="+id;
+    localStorage.setItem("background", id);
     body.style.backgroundImage = 'url("'+backgrounds[id]+'")';
     OpenCloseBackgroundMenu()
 }
@@ -114,6 +114,10 @@ function Search() {
 
 function loadPage(url) {
     window.location.href = url;
+}
+
+function openMenu(number) {
+    
 }
 
 
